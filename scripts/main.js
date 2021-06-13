@@ -1,20 +1,14 @@
-console.log("Welcome to the main module")
 
-document.getElementById('fetchUserDateBtn').addEventListener('click', fetchUserData)
-
-function fetchUserData() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-        .then((res) => res.json())
-        .then((json) => {
-            let output = '<h2>List of users</h2>'
-            output += '<ul> ';
-            json.map(j => {
-                console.log(j)
-                output += `<li>
-    ${j.name}
-</li>`;
-            })
-            output += '</ul>'
-            document.getElementById('response').innerHTML = output
-        })
+async function getData() {
+    const response = await fetch('ZonAnn.Ts+dSST.csv')
+    const data = await response.text()
+    const rows = data.split('\n').slice(1)
+    rows.map(elt => {
+        const row = elt.split(',')
+        const year = row[0]
+        const av = row[1]
+        year ? console.log("YEAR: ", year, "AV: ", av) : null
+    })
 }
+
+getData()
